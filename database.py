@@ -56,4 +56,6 @@ def image_dataset():
             embedding = image_embedding.se_image(coco_features[ID])
             dataset.append((ID, url, embedding))
 
-    return dataset
+    output = open('database.p', 'wb')
+    pickle.dump(dataset, output)
+    output.close()

@@ -1,4 +1,4 @@
-
+import numpy as np
 
 def se_image(image_features):
     """
@@ -21,6 +21,7 @@ def se_image(image_features):
         Image embedding
 
     """
-    M = # get from Christian
-    b = # get from Christian
+    # M and b are made up, need to get from Christian
+    M = np.ones(512, 50)
+    b = 1
     return image_features * M + b

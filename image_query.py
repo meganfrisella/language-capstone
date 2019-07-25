@@ -42,6 +42,7 @@ def query(text_embedding, num_images):
 
     database = pickle.load(f)
     f.close()
+
     for unused_id, image_url, image_embedding in database:
         cos_sim = cosine_similarity(text_embedding, image_embedding)
         images.append((cos_sim, image_url))

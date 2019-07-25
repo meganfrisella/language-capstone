@@ -93,7 +93,7 @@ def image_dataset():
         ID = image['id']
         url = image['coco_url']
         if ID in coco_features:
-            embedding = embeddings.se_image(coco_features[ID])
+            embedding = se_image(coco_features[ID])
             dataset.append((ID, url, embedding))
 
     output = open('database.p', 'wb')

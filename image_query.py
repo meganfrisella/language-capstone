@@ -6,14 +6,17 @@ import matplotlib.pyplot as plt
 from gensim.models.keyedvectors import KeyedVectors
 
 
-def se_text(text, words_to_idfs):
+def load_glove():
+    return KeyedVectors.load_word2vec_format("./glove.6B.50d.txt.w2v", binary=False)
+
+
+def se_text(text, words_to_idfs, glove50):
     """
     :param text: string
     :param words_to_idfs: dict[string:float]
     :return: np.array[float]
     """
-    path = r"C:\Users\Vaishnavi\Desktop\CogWorks\Student_Week3\word_embeddings\glove.6B.50d.txt.w2v\glove.6B.50d.txt.w2v"
-    glove50 = KeyedVectors.load_word2vec_format(path, binary=False)
+
     words = text.split()
     filtered_words = [word for word in words if word in words_to_idfs]
     res = np.zeros((50,))

@@ -45,6 +45,17 @@ def load_coco_metadata():
 
 
 def image_dataset():
+    """
+    Saves the image dataset in a pickle file. The dataset is a a list of tuples in
+    the form (ID, url, embedding) for each image.
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
+    """
     dataset = []
     coco_features = load_coco_features()
     coco_metadata = load_coco_metadata()

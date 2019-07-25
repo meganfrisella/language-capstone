@@ -12,7 +12,7 @@ def import_token_to_idf():
     --------
     [dict] token(string) to idf dictionary
     """
-    f = open("triplets.p", "rb")
+    f = open("token_to_idf.p", "rb")
     token_to_idf = pickle.load(f)
     f.close()
     return token_to_idf

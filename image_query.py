@@ -1,13 +1,7 @@
-import pickle
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from urllib.request import urlopen
 import matplotlib.pyplot as plt
-from gensim.models.keyedvectors import KeyedVectors
-
-
-def load_glove():
-    return KeyedVectors.load_word2vec_format("glove.6B.50d.txt.w2v", binary=False)
 
 
 def se_text(text, words_to_idfs, glove50):
@@ -28,7 +22,7 @@ def se_text(text, words_to_idfs, glove50):
     return res/np.sqrt(res_squared.sum())
 
 
-def query(text_embedding, num_images):
+def query(text_embedding, num_images, database):
     """
     :param text_input: string
     :param num_images: int
@@ -37,11 +31,7 @@ def query(text_embedding, num_images):
     are most related to the text_input search
     """
     images = []
-    #reading from database:
-    f = open("database.p", "rb")
 
-    database = pickle.load(f)
-    f.close()
     for unused_id, image_url, image_embedding in database:
         cos_sim = cosine_similarity(text_embedding, image_embedding)
         images.append((cos_sim, image_url))

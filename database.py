@@ -85,7 +85,8 @@ def image_dataset():
     -------
 
     """
-    dataset = []
+    embeddings = []
+    urls = []
     coco_features = load_coco_features()
     coco_metadata = load_coco_metadata()
 
@@ -94,7 +95,10 @@ def image_dataset():
         url = image['coco_url']
         if ID in coco_features:
             embedding = se_image(coco_features[ID])
-            dataset.append((ID, url, embedding))
+            embeddings.append(embedding)
+            urls.append(url)
+
+
 
     output = open('database.p', 'wb')
     pickle.dump(dataset, output)

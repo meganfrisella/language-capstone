@@ -7,7 +7,7 @@ from gensim.models.keyedvectors import KeyedVectors
 
 
 def load_glove():
-    return KeyedVectors.load_word2vec_format("./glove.6B.50d.txt.w2v", binary=False)
+    return KeyedVectors.load_word2vec_format("glove.6B.50d.txt.w2v", binary=False)
 
 
 def se_text(text, words_to_idfs, glove50):
@@ -19,7 +19,7 @@ def se_text(text, words_to_idfs, glove50):
 
     words = text.split()
     filtered_words = [word for word in words if word in words_to_idfs and word in glove50]
-    res = np.zeros((50,))
+    res = np.zeros((1, 50))
     for word in filtered_words:
         res += glove50[word]*words_to_idfs[word]
 

@@ -28,7 +28,7 @@ def se_text(text, words_to_idfs, glove50):
     return res/np.sqrt(res_squared.sum())
 
 
-def query(text_input, num_images):
+def query(text_embedding, num_images):
     """
     :param text_input: string
     :param num_images: int
@@ -43,7 +43,6 @@ def query(text_input, num_images):
     database = pickle.load(f)
     f.close()
     for unused_id, image_url, image_embedding in database:
-        text_embedding = se_text[text_input]
         cos_sim = cosine_similarity(text_embedding, image_embedding)
         images.append((cos_sim, image_url))
     sorted_list = sorted(images)[:num_images]

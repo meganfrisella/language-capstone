@@ -1,4 +1,3 @@
-import embeddings
 import pickle
 import json
 import numpy as np

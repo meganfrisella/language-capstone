@@ -32,11 +32,12 @@ def query(text_embedding, num_images, database):
     """
     images = []
 
-    for unused_id, image_url, image_embedding in database:
-        cos_sim = cosine_similarity(text_embedding, image_embedding)
-        images.append((cos_sim, image_url))
-    sorted_list = sorted(images)[:num_images]
-    result = [url for sim, url in sorted_list]
+    image_embeddings = database[0]
+    text_embedding = text_embedding.flatten()
+    res = (image_embeddings@text_embedding).reshape(text_embedding.shape)
+    zipped = zip((res, database[1]))
+    sort = sorted(zipped)[:num_images]
+    result = [j for i,j in sort]
     return result
 
 

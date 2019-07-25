@@ -1,3 +1,6 @@
+import pickle
+
+
 def import_token_to_idf():
     """imports token_to_idf dictionary
 

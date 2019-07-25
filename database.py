@@ -98,8 +98,8 @@ def image_dataset():
             embeddings.append(embedding)
             urls.append(url)
 
-
+    database = [np.array(embeddings), urls]
 
     output = open('database.p', 'wb')
-    pickle.dump(dataset, output)
+    pickle.dump(database, output)
     output.close()

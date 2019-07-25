@@ -18,7 +18,7 @@ def se_text(text, words_to_idfs, glove50):
     """
 
     words = text.split()
-    filtered_words = [word for word in words if word in words_to_idfs]
+    filtered_words = [word for word in words if word in words_to_idfs and word in glove50]
     res = np.zeros((50,))
     for word in filtered_words:
         res += glove50[word]*words_to_idfs[word]

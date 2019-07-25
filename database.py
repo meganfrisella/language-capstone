@@ -52,7 +52,8 @@ def image_dataset():
     for image in coco_metadata['images']:
         ID = image['id']
         url = image['coco_url']
-        embedding = image_embedding.se_image(coco_features[ID])
-        dataset.append((ID, url, embedding))
+        if ID in coco_features:
+            embedding = image_embedding.se_image(coco_features[ID])
+            dataset.append((ID, url, embedding))
 
     return dataset

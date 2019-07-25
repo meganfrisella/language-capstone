@@ -1,7 +1,5 @@
 import pickle
 
-myPath = 'Users/MeganFrisella/GitHub/language-capstone/'
-
 
 def load_coco_images():
     """
@@ -17,25 +15,32 @@ def load_coco_images():
 
     """
 
-    f = open("resnet18_features.pkl", "rb")
+    f = open("./resnet18_features.pkl", "rb")
     coco_images = pickle.load(f)
     f.close()
 
     return coco_images
 
 
-def se_image(image):
+def se_image(image_features, M, b):
     """
     Description
 
     Parameters
     ----------
-    var: var_type
-        Description
+    image_features: np.array, shape=(1, 512)
+        Image feature array from COCO dataset
+
+    M: np.array, shape=(512, 50)
+        Trained parameter for embedding image feature array
+
+    b: np.int
+        Trained bias parameter for embedding image feature array
 
     Returns
     -------
-    var_type, shape=(27, 27)
-        Description
+    np.array, shape=(1, 50)
+        Image embedding
 
     """
+    return image_features * M + b

@@ -10,7 +10,7 @@ def se_text(text, words_to_idfs, glove50):
     :param words_to_idfs: dict[string:float]
     :return: np.array[float]
     """
-    text = text.lower()
+    textg = text.lower()
     words = text.split()
     filtered_words = [word for word in words if word in words_to_idfs and word in glove50]
     res = np.zeros((1, 50))
@@ -30,13 +30,11 @@ def query(text_embedding, num_images, database):
     This function returns a list of the (num_images) urls that
     are most related to the text_input search
     """
-    images = []
-
     image_embeddings = database[0]
     text_embedding = text_embedding.flatten()
     res = np.dot(image_embeddings, text_embedding)
     zipped = tuple(zip(res, database[1]))
-    sort = sorted(zipped)[:num_images]
+    sort = sorted(zipped)[-1:-num_images:-1]
     result = [j for i,j in sort]
     return result
 

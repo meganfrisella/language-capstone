@@ -46,7 +46,7 @@ def load_coco_metadata():
 # Lilian is awesome!!!
 
 
-def se_image(image_features):
+def se_image(image_features, parameters):
     """
     Description
 
@@ -68,8 +68,8 @@ def se_image(image_features):
 
     """
     # M and b are made up, need to get from Christian
-    M = np.ones((512, 50))
-    b = 1
+    M = parameters[0].data
+    b = parameters[1].data
     return image_features @ M + b
 
 
@@ -90,11 +90,16 @@ def image_dataset():
     coco_features = load_coco_features()
     coco_metadata = load_coco_metadata()
 
+    # Load trained parameters
+    f = open("parameters2.p", "rb")
+    parameters = pickle.load(f)
+    f.close()
+
     for image in coco_metadata['images']:
         ID = image['id']
         url = image['coco_url']
         if ID in coco_features:
-            embedding = se_image(coco_features[ID]).reshape((50,))
+            embedding = se_image(coco_features[ID], parameters).reshape((50,))
             embeddings.append(embedding)
             urls.append(url)
 

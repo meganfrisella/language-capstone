@@ -25,7 +25,7 @@ def run():
 
     """
     text = input("Search: ")
-    input_string = text
+    input_string = text.lower()
 
     words_to_idfs = token_to_idf_db.import_token_to_idf()
 

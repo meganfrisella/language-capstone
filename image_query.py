@@ -10,7 +10,7 @@ def se_text(text, words_to_idfs, glove50):
     :param words_to_idfs: dict[string:float]
     :return: np.array[float]
     """
-
+    text = text.lower()
     words = text.split()
     filtered_words = [word for word in words if word in words_to_idfs and word in glove50]
     res = np.zeros((1, 50))

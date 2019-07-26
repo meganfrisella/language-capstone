@@ -11,6 +11,8 @@ from mynn.optimizers.adam import Adam
 
 from sklearn.metrics.pairwise import cosine_similarity
 
+
+
 def initialize_model(triplets, learning_rate=0.1):
     """
     Initializes the encoder model and optimizer for training.
@@ -37,7 +39,7 @@ def initialize_model(triplets, learning_rate=0.1):
     
     return (model, optim)
 
-def train(model, optim, triplets, batch_size=100, num_epochs=10, margin=0.1):
+def train(triplets, batch_size=100, num_epochs=10, margin=0.1):
     """
     Trains the encoder for embedding images by comparing
     the cosine similarities of the 'good' images with their
@@ -99,3 +101,5 @@ def train(model, optim, triplets, batch_size=100, num_epochs=10, margin=0.1):
             loss.backward()
             optim.step()
             loss.null_gradients()
+    
+    return model

@@ -8,7 +8,7 @@ from mygrad.nnet import margin_ranking_loss
 from mynn.layers.dense import dense
 from mynn.initializers.normal import normal
 from mynn.optimizers.adam import Adam
-
+import image_feature_encoder
 from sklearn.metrics.pairwise import cosine_similarity
 
 
@@ -34,7 +34,7 @@ def initialize_model(triplets, learning_rate=0.1):
         A tuple consisting of an instance of the untrained
         encoder model, and the optimizer for training.
     """
-    model = Encoder(d_feature=512, d_embed=50)
+    model = image_feature_encoder.Encoder(d_feature=512, d_embed=50)
     optim = Adam(model.parameters, learning_rate=learning_rate)
     
     return (model, optim)

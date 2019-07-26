@@ -94,7 +94,7 @@ def image_dataset():
         ID = image['id']
         url = image['coco_url']
         if ID in coco_features:
-            embedding = se_image(coco_features[ID])
+            embedding = se_image(coco_features[ID]).reshape((50,))
             embeddings.append(embedding)
             urls.append(url)
 

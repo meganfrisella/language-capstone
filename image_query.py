@@ -34,8 +34,8 @@ def query(text_embedding, num_images, database):
 
     image_embeddings = database[0]
     text_embedding = text_embedding.flatten()
-    res = (image_embeddings@text_embedding).reshape(text_embedding.shape)
-    zipped = zip((res, database[1]))
+    res = (np.dot(image_embeddings, text_embedding))
+    zipped = tuple(zip(res, database[1]))
     sort = sorted(zipped)[:num_images]
     result = [j for i,j in sort]
     return result

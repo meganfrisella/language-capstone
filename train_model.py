@@ -9,9 +9,6 @@ from mynn.layers.dense import dense
 from mynn.initializers.normal import normal
 from mynn.optimizers.adam import Adam
 import image_feature_encoder
-from sklearn.metrics.pairwise import cosine_similarity
-
-
 
 def initialize_model(triplets, learning_rate=0.1):
     """
@@ -103,3 +100,9 @@ def train(triplets, batch_size=100, num_epochs=10, margin=0.1):
             loss.null_gradients()
     
     return model
+
+def cosine_similarity(x, y):
+    """
+    Write docstring!!!
+    """
+    return (x*y).sum(axis=1)

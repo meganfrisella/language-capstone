@@ -52,7 +52,7 @@ def train(model, optim, triplets, batch_size=100, num_epochs=10, margin=0.1):
     optim : mynn.optimizers.adam
         The Adam optimizer for the model.
     
-    triplet : Tuple[np.array, np.array, np.array]
+    triplets : Tuple[np.array, np.array, np.array]
         A tuple of length=3 of 2-dimensional, where column 0 is
         the embedded caption vector, column 1 is the good image
         feature vector, and column 2 is the bad image feature
@@ -74,6 +74,7 @@ def train(model, optim, triplets, batch_size=100, num_epochs=10, margin=0.1):
         The trained encoder model for embedding images.
     """
     caption, good_img, bad_img = triplets
+    caption /= np.sqrt(np.sum(caption ** 2))
     
     for epoch_cnt in range(num_epochs):
         idxs = np.arange(len(caption))
@@ -86,6 +87,9 @@ def train(model, optim, triplets, batch_size=100, num_epochs=10, margin=0.1):
             
             good_emb = model(good_batch)
             bad_emb = model(bad_batch)
+            
+            good_emb /= np.sqrt(np.sum(good_emb ** 2))
+            bad_emb /= np.sqrt(np.sum(bad_emb ** 2))
             
             good_cossim = cosine_similarity(good_emb, caption_emb)
             bad_cossim = cosine_similarity(bad_emb, caption_emb)

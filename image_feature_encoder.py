@@ -51,6 +51,6 @@ class Encoder:
         -------
         Tuple[mg.Tensor, ...]
             A tuple containing all of the learnable parameters of
-            the model
+            the model.
         """
         return self.encode.parameters
